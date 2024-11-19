@@ -1,9 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
+const bodyParser = require('body-parser');
 
-// Load environment variables
 dotenv.config();
 
 const app = express();
@@ -13,15 +12,19 @@ const MONGO_URI = process.env.MONGO_URI;
 // Middleware
 app.use(bodyParser.json());
 
-// Connect to MongoDB
+// MongoDB Connection
 mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log("Connected to MongoDB"))
-    .catch((err) => console.error("MongoDB connection error:", err));
+    .then(() => console.log('Connected to MongoDB'))
+    .catch((err) => console.error('MongoDB connection error:', err));
 
 // Routes
-app.use('/api/test', require('./routes/testRoute'));
+const actorRoutes = require('./routes/actorRoutes');
+const audioRecordRoutes = require('./routes/audioRecordRoutes');
 
-// Start the server
+app.use('/api/actors', actorRoutes);
+app.use('/api/audio', audioRecordRoutes);
+
+// Start Server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
