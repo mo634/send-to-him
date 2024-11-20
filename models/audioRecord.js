@@ -20,6 +20,7 @@ const audioRecordSchema = new mongoose.Schema({
         ref: 'Actor',
         required: true,
     },
+    favourite: { type: Boolean, default: false },
 });
 
 module.exports = mongoose.model('AudioRecord', audioRecordSchema);

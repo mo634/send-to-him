@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
+const favouritesRoutes = require('./routes/favouritesRoutes');
 
 dotenv.config();
 
@@ -23,7 +24,7 @@ const audioRecordRoutes = require('./routes/audioRecordRoutes');
 
 app.use('/api/actors', actorRoutes);
 app.use('/api/audio', audioRecordRoutes);
-
+app.use('/api/favourites', favouritesRoutes);
 // Start Server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
